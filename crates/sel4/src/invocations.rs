@@ -427,12 +427,12 @@ impl<C: InvocationContext> AbsoluteCPtr<C> {
     /// Corresponds to `seL4_CNode_Rotate`
     pub fn rotate(self, src: &AbsoluteCPtr, pivot: &AbsoluteCPtr, dest_badge: Word, pivot_badge: Word) -> Result<()> {
         Error::wrap(self.invoke(|cptr, path, ipc_buffer| {
-            ipc_buffer.inner_mut().seL4_CNode_Move(
+            ipc_buffer.inner_mut().seL4_CNode_Rotate(
                 cptr.bits(),
                 path.bits(),
                 path.depth_for_kernel(),
                 dest_badge,
-                pivot.root().bits,
+                pivot.root().bits(),
                 pivot.path().bits(),
                 pivot.path().depth_for_kernel(),
                 pivot_badge,
